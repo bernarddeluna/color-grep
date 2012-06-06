@@ -9,7 +9,8 @@ var win = window,
    irgb = doc.querySelector('.info .rgb'),                // rgb paragraph info
    ihsl = doc.querySelector('.info .hsl'),                // hsl paragraph info
    iinv = doc.querySelector('.info .inv'),                // inverted color of seleted one
-  helpr = doc.querySelector('p.drop');                    // the guiding text with arrow
+  helpr = doc.querySelector('p.drop');                    // making it 2d
+   logo = doc.querySelector('.logo'),                     // Logo
  mGlass = doc.createElement('div'),                       // magnifying glass (soon)
     dbg = false;                                          // debug mode true|false
 
@@ -104,17 +105,18 @@ function ehClick(e){
       hex = '#' + ('000000' + rgbToHex(p[0], p[1], p[2])).slice(-6),
       hsl = Colour(hex).toHSLString(),
       inv = Colour(hex).invert().toString();
-  irgb.innerHTML = 'rgb: '+ p[0] +','+ p[1] +','+ p[2];
-  ihex.innerHTML = 'hex: '+ hex;
-  ihsl.innerHTML = 'hsl: '+ hsl;
-  iinv.innerHTML = 'inv: '+ inv;
+  irgb.innerHTML = 'rgb: '+'<span>'+ p[0] +','+ p[1] +','+ p[2]+'</span>';
+  ihex.innerHTML = 'hex: '+'<span>'+ hex+'</span>';
+  ihsl.innerHTML = 'hsl: '+'<span>'+ hsl+'</span>';
+  iinv.innerHTML = 'inv: '+'<span>'+ inv+'</span>';
   irgb.style.color = inv;
   ihex.style.color = inv;
   ihsl.style.color = inv;
   iinv.style.color = inv;
   
   info.style.backgroundColor = hex;
-  info.style.boxShadow = 'inset 0 0 0 1px '+ inv;
+  logo.style.backgroundColor = hex;
+  // info.style.boxShadow = 'inset 0 0 0 1px '+ inv;
 
   if(info.style.top !== '-12px'){
     info.style.top = '-12px';
@@ -143,15 +145,16 @@ function findPos(obj) {
   return undefined;
 }
 
-function infoClick(){
-  if(info.offsetLeft > 20){
-    info.style.left = 20 + 'px';
-  } else {
-    info.style.left = (win.innerWidth - (info.offsetWidth + 20)) + 'px';
-  }
+// If this function is enabled, I can't use "double click" to copy the color syntax
+// function infoClick(){
+//   if(info.offsetLeft > 20){
+//     info.style.left = 20 + 'px';
+//   } else {
+//     info.style.left = (win.innerWidth - (info.offsetWidth + 20)) + 'px';
+//   }
 
-  if(dbg) console.log('info left: '+ info.offsetLeft);
-}
+//   if(dbg) console.log('info left: '+ info.offsetLeft);
+// }
 
 function getOffset( el ) {
   var _x = 0;
